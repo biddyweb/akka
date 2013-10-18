@@ -201,7 +201,8 @@ object FSMTimingSpec {
       case Initial -> TestSingleTimerResubmit ⇒ setTimer("blah", Tick, 500.millis.dilated, false)
     }
     when(TestSingleTimerResubmit) {
-      case Event(Tick, _) ⇒ tester ! Tick; setTimer("blah", Tock, 500.millis.dilated, false); stay()
+      case Event(Tick, _) ⇒
+        tester ! Tick; setTimer("blah", Tock, 500.millis.dilated, false); stay()
       case Event(Tock, _) ⇒ tester ! Tock; goto(Initial)
     }
     when(TestCancelTimer) {
